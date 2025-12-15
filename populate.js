@@ -3,7 +3,6 @@ import 'dotenv/config';
 import { connectDB } from './db/connect.js';
 import Product from './models/product.js';
 
-// import './products.json';
 import jsonProducts from './products.json' with { type: 'json' };
 
 
