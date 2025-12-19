@@ -1,13 +1,5 @@
 import Product from '../models/product.js';
 
-export const getAllProductsStatic = async (req, res) => {
-  // const search = 'din';
-  const products = await Product.find({
-    // name: { $regex: search, $options: 'i' },
-  }).select('name createdAt price');
-  res.status(200).json({ products, nbHits: products.length });
-};
-
 export const getAllProducts = async (req, res) => {
   const { featured, company, name, sort, fields, numericFilters } = req.query;
   const queryObject = {};
@@ -46,7 +38,11 @@ export const getAllProducts = async (req, res) => {
       const [field, operator, value] = item.split('-');
 
       if (options.includes(field)) {
-        queryObject[field] = { [operator]: Number(value) };
+        if (queryObject[field]) {
+          queryObject[field][operator] = Number(value);
+        } else {
+          queryObject[field] = { [operator]: Number(value) };
+        }
       }
     });
   }
