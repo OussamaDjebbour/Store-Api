@@ -28,8 +28,6 @@ const productSchema = new mongoose.Schema({
       message: '{VALUE} is not supported',
     },
   },
-  //     enum: ['ikea', 'liddy', 'caressa', 'marcos'],
-  //   },
 });
 
 export default mongoose.model('Product', productSchema);
